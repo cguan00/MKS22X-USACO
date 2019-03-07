@@ -2,6 +2,8 @@ import java.util.*;
 import java.io.*;
 
 public class USACO{
+  private static int[][] squares;
+
   public static int bronze(String filename) throws FileNotFoundException{
     File text = new File(filename);
     Scanner inf = new Scanner(text);
@@ -21,7 +23,7 @@ public class USACO{
     int N = Integer.parseInt(firstLine[3]);
 
     //accessing the squares of the land
-    int[][] squares = new int[R][C];
+    squares = new int[R][C];
     String[] line;
     for(int i = 1; i <= R ; i++){
       line = lines.get(i).split(" ");
@@ -54,12 +56,32 @@ public class USACO{
       R_s = Integer.parseInt(instructions[0]);
       C_s = Integer.parseInt(instructions[1]);
       D_s = Integer.parseInt(instructions[2]);
-      System.out.println(R_s);
-      System.out.println(C_s);
-      System.out.println(D_s);
+      //must call stomp here
+      //stomp(R_s, C_s, D_s);
     }
-
     return 0;
+  }
+
+  public static void stomp(int row, int col, int level){
+    int inches = level;
+    while(inches != 0){
+      int max = 0;
+      for(int i = 0; i < row + 3; i++){
+        for(int j = col; j < col + 3; j++){
+          if(squares[i][j] >= max){
+            max = squares[i][j];
+          }
+        }
+      }
+      for(int i = 0; i < row + 3; i++){
+        for(int j = 0; j < col + 3; j++){
+          if(squares[i][j] >= max){
+            squares[i][j] -= 1;
+          }
+        }
+      }
+      inches--;
+    }
   }
 
    public static int silver(String filename){
