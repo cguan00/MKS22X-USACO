@@ -36,7 +36,7 @@ public class USACO{
     // String output = "";
     // for(int i = 0; i < R; i++){
     //   for(int j = 0; j < C; j++){
-    //     output += squares[i][j] + ", ";
+    //     output += squares[i][j] + " ";
     //   }
     //   output += "\n";
     // }
@@ -56,8 +56,11 @@ public class USACO{
       R_s = Integer.parseInt(instructions[0]);
       C_s = Integer.parseInt(instructions[1]);
       D_s = Integer.parseInt(instructions[2]);
-      //must call stomp here
-      //stomp(R_s, C_s, D_s);
+      // System.out.println("R_s: " + R_s);
+      // System.out.println("C_s: " + C_s);
+      // System.out.println("D_s: " + D_s);
+      stomp(R_s - 1, C_s - 1, D_s);
+      printSquares();
     }
     return 0;
   }
@@ -66,7 +69,7 @@ public class USACO{
     int inches = level;
     while(inches != 0){
       int max = 0;
-      for(int i = 0; i < row + 3; i++){
+      for(int i = row; i < row + 3; i++){
         for(int j = col; j < col + 3; j++){
           if(squares[i][j] >= max){
             max = squares[i][j];
@@ -84,8 +87,19 @@ public class USACO{
     }
   }
 
-   public static int silver(String filename){
-     return 0;
-   }
 
+  public static void printSquares(){
+    String output = "";
+    for(int i = 0; i < squares.length; i++){
+      for(int j = 0; j < squares[i].length; j++){
+        output += squares[i][j] + " ";
+      }
+      output += "\n";
+    }
+    System.out.println(output);
+  }
+
+  public static int silver(String filename){
+    return 0;
+  }
 }
