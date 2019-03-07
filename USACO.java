@@ -60,9 +60,10 @@ public class USACO{
       // System.out.println("C_s: " + C_s);
       // System.out.println("D_s: " + D_s);
       stomp(R_s - 1, C_s - 1, D_s);
-      printSquares();
+      // printSquares();
     }
-    return 0;
+    // System.out.println(calculation(E));
+    return calculation(E);
   }
 
   public static void stomp(int row, int col, int level){
@@ -87,6 +88,20 @@ public class USACO{
     }
   }
 
+  public static int calculation(int target){
+    int aggDepth = 0;
+    int depth = 0;
+    for(int i = 0; i < squares.length; i++){
+      for(int j = 0; j < squares[i].length; j++){
+        if(squares[i][j] < target){
+          aggDepth += target - squares[i][j];
+        }
+      }
+    }
+    // System.out.println(aggDepth);
+    // System.out.println(aggDepth * 72 * 72);
+    return aggDepth * 72 * 72;
+  }
 
   public static void printSquares(){
     String output = "";
