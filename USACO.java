@@ -56,13 +56,11 @@ public class USACO{
       R_s = Integer.parseInt(instructions[0]);
       C_s = Integer.parseInt(instructions[1]);
       D_s = Integer.parseInt(instructions[2]);
-      // System.out.println("R_s: " + R_s);
-      // System.out.println("C_s: " + C_s);
-      // System.out.println("D_s: " + D_s);
+      // System.out.println(R_s + " " + C_s + " " + D_s);
       stomp(R_s - 1, C_s - 1, D_s);
       // printSquares();
     }
-    // System.out.println(calculation(E));
+    System.out.println(calculation(E));
     return calculation(E);
   }
 
