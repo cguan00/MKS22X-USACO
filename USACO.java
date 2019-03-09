@@ -32,15 +32,15 @@ public class USACO{
       }
     }
 
-    // //debugging by printing out the squares
-    // String output = "";
-    // for(int i = 0; i < R; i++){
-    //   for(int j = 0; j < C; j++){
-    //     output += squares[i][j] + " ";
-    //   }
-    //   output += "\n";
-    // }
-    // System.out.println(output);
+    //debugging by printing out the squares
+    String output = "";
+    for(int i = 0; i < R; i++){
+      for(int j = 0; j < C; j++){
+        output += squares[i][j] + " ";
+      }
+      output += "\n";
+    }
+    System.out.println(output);
 
     //accessing stomp digging instructions
     String[] instructions;
@@ -53,14 +53,13 @@ public class USACO{
       // for(int j = 0; j < instructions.length; j++){
       //   System.out.println(instructions[j]);
       // }
-      R_s = Integer.parseInt(instructions[0]);
-      C_s = Integer.parseInt(instructions[1]);
+      R_s = Integer.parseInt(instructions[0]) - 1;
+      C_s = Integer.parseInt(instructions[1]) - 1;
       D_s = Integer.parseInt(instructions[2]);
       // System.out.println(R_s + " " + C_s + " " + D_s);
-      stomp(R_s - 1, C_s - 1, D_s);
+      stomp(R_s, C_s, D_s);
       // printSquares();
     }
-    System.out.println(calculation(E));
     return calculation(E);
   }
 
@@ -75,8 +74,8 @@ public class USACO{
           }
         }
       }
-      for(int i = 0; i < row + 3; i++){
-        for(int j = 0; j < col + 3; j++){
+      for(int i = row; i < row + 3; i++){
+        for(int j = col; j < col + 3; j++){
           if(squares[i][j] >= max){
             squares[i][j] -= 1;
           }
@@ -88,10 +87,9 @@ public class USACO{
 
   public static int calculation(int target){
     int aggDepth = 0;
-    int depth = 0;
     for(int i = 0; i < squares.length; i++){
       for(int j = 0; j < squares[i].length; j++){
-        if(squares[i][j] < target){
+        if(target - squares[i][j] >= 0){
           aggDepth += target - squares[i][j];
         }
       }
