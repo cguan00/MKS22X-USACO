@@ -3,6 +3,7 @@ import java.io.*;
 
 public class USACO{
   private static int[][] squares;
+  private static char[][] pasture;
 
   public static int bronze(String filename) throws FileNotFoundException{
     File text = new File(filename);
@@ -94,7 +95,59 @@ public class USACO{
     System.out.println(output);
   }
 
-  public static int silver(String filename){
+
+  public static int silver(String filename) throws FileNotFoundException{
+    File text = new File(filename);
+    Scanner inf = new Scanner(text);
+    ArrayList<String> lines = new ArrayList<String>();
+
+    //reading the file and storing each line in an ArrayList
+    while(inf.hasNextLine()){
+      String line = inf.nextLine();
+      lines.add(line);
+    }
+
+    //splitting the first line by spaces to get each of the four integers R, C, E, N
+    String[] firstLine = lines.get(0).split(" ");
+    int N = Integer.parseInt(firstLine[0]);
+    int M = Integer.parseInt(firstLine[1]);
+    int T = Integer.parseInt(firstLine[2]);
+
+    System.out.println(N + " " + M + " " + T);
+
+    //accessing the squares of the land
+    pasture = new char[N][M];
+    for(int i = 1; i <= N; i++){
+      for(int j = 0; j < M; j++){
+        pasture[i - 1][j] = lines.get(i).charAt(j);;
+      }
+    }
+
+    printPasture();
+
+    String[] lastLine = lines.get(lines.size() - 1).split(" ");
+    int R1 = Integer.parseInt(lastLine[0]);
+    int C1 = Integer.parseInt(lastLine[1]);
+    int R2 = Integer.parseInt(lastLine[2]);
+    int C2 = Integer.parseInt(lastLine[3]);
+
+    System.out.println(R1 + " " + C1 + " " + R2 + " " + C2 + " ");
+
+
     return 0;
+  }
+
+
+
+
+  public static void printPasture(){
+    String output = "";
+    for(int i = 0; i < pasture.length; i++){
+      for(int j = 0; j < pasture[i].length; j++){
+        output += pasture[i][j];
+      }
+      output += "\n";
+    }
+    System.out.println(output);
   }
 }
