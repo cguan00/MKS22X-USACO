@@ -32,42 +32,27 @@ public class USACO{
       }
     }
 
-    //debugging by printing out the squares
-    String output = "";
-    for(int i = 0; i < R; i++){
-      for(int j = 0; j < C; j++){
-        output += squares[i][j] + " ";
-      }
-      output += "\n";
-    }
-    System.out.println(output);
-
     //accessing stomp digging instructions
     String[] instructions;
     int R_s;
     int C_s;
     int D_s;
     for(int i = R + 1; i < lines.size(); i++){
-      // System.out.println(lines.get(i));
       instructions = lines.get(i).split(" ");
-      // for(int j = 0; j < instructions.length; j++){
-      //   System.out.println(instructions[j]);
-      // }
       R_s = Integer.parseInt(instructions[0]) - 1;
       C_s = Integer.parseInt(instructions[1]) - 1;
       D_s = Integer.parseInt(instructions[2]);
-      // System.out.println(R_s + " " + C_s + " " + D_s);
-      stomp(R_s, C_s, D_s);
-      // printSquares();
+      stomp(R_s, C_s, D_s);//stomp the ground
     }
     return calculation(E);
   }
 
+  //stomp the land according to the stomp instructions
   public static void stomp(int row, int col, int level){
     int inches = level;
     while(inches != 0){
       int max = 0;
-      for(int i = row; i < row + 3; i++){
+      for(int i = row; i < row + 3; i++){//keep track of the highest elevation
         for(int j = col; j < col + 3; j++){
           if(squares[i][j] >= max){
             max = squares[i][j];
@@ -85,6 +70,7 @@ public class USACO{
     }
   }
 
+  //calculate the volume by multiplying by 72 *72 to find cubic inches
   public static int calculation(int target){
     int aggDepth = 0;
     for(int i = 0; i < squares.length; i++){
@@ -94,8 +80,6 @@ public class USACO{
         }
       }
     }
-    // System.out.println(aggDepth);
-    // System.out.println(aggDepth * 72 * 72);
     return aggDepth * 72 * 72;
   }
 
