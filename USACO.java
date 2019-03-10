@@ -114,7 +114,7 @@ public class USACO{
 
     // System.out.println(N + " " + M + " " + T);
 
-    //accessing the squares of the pasture
+    //accessing the squares of the pasture. char version so i can check and see if i am reading file correctly
     char[][] charPasture = new char[N][M];
     for(int i = 1; i <= N; i++){
       for(int j = 0; j < M; j++){
@@ -124,6 +124,7 @@ public class USACO{
 
     // printPasture(charPasture);
 
+    //creating int version of pasture, where trees are -1 and everything else is 0
     int[][] pasture = new int[charPasture.length][charPasture[0].length];
     for(int i = 0; i < charPasture.length; i++){
       for(int j = 0; j < charPasture[i].length; j++){
@@ -143,26 +144,26 @@ public class USACO{
     // System.out.println(R1 + " " + C1 + " " + R2 + " " + C2 + " ");
 
     pasture[R1][C1] = 1;
-    for(int i = 0; i < T; i++){
+    for(int i = 0; i < T; i++){//loop through in the amount of available time/steps
       pasture = silverHelper(pasture);
     }
 
     return pasture[R2][C2];
   }
 
-  private static int[][] silverHelper(int[][] pasture) {
-    int[][] moves = {{-1,0},{1,0},{0,-1},{0,1}};
+  private static int[][] silverHelper(int[][] pasture){
     int[][] newPasture = new int[pasture.length][pasture[0].length];
-    for(int r = 0; r < pasture.length; r++) {
+    int[][] moves = {{-1,0},{1,0},{0,-1},{0,1}};//possible moves
+    for(int r = 0; r < pasture.length; r++) {//loop through each square
       for(int c = 0; c < pasture[r].length; c++){
-        if(pasture[r][c] == -1){
+        if(pasture[r][c] == -1){//if a tree, copy over
           newPasture[r][c] = -1;
         }else {//not a tree
           int sum = 0;
           for(int i = 0; i < moves.length; i++){
             int newR = r + moves[i][0];
             int newC = c + moves[i][1];
-            if (!outOfBounds(pasture, newR, newC) && pasture[newR][newC] != -1) {
+            if(!outOfBounds(pasture, newR, newC) && pasture[newR][newC] != -1){//not out of bounds and not a tree
               sum += pasture[newR][newC];
             }
             newPasture[r][c] = sum;
@@ -173,15 +174,12 @@ public class USACO{
     return newPasture;
   }
 
-
-
   private static boolean outOfBounds(int[][] pasture, int r, int c) {
     if(r < 0 || c < 0 || r >= pasture.length || c >= pasture[0].length){
       return true;
     }
     return false;
   }
-
 
   public static void printPasture(char[][] pasture){
     String output = "";
